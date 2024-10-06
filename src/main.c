@@ -8,7 +8,6 @@
 #define STR(x) VAL(x)
 #define VAL(x) #x
 
-#define PALIFORGE_LIB_PATH lua // if the path to the paliforge lib was not passed during compile time, by default use lua/ to be searched in cwd
 #define PALIFORGE_LIB_PATH_STR STR(PALIFORGE_LIB_PATH) // because c macros are weird
 
 #define PALIFORGE_LIB_ENTRYPOINT_PATH PALIFORGE_LIB_PATH_STR "/main.lua"

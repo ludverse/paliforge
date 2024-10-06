@@ -11,7 +11,7 @@ install: $(TARGET) $(LUA_FILES)
 	cp -r lua $(DESTDIR)$(PREFIX)/lib/paliforge
 
 $(TARGET): $(SRC_FILES)
-	cc $(SRC_FILES) -l${LUA_LIB} -DPALIFORGE_LUA_LIB=$(DESTDIR)$(PREFIX)/lib/paliforge/lua -o $(TARGET)
+	cc $(SRC_FILES) -l${LUA_LIB} -DPALIFORGE_LIB_PATH=$(DESTDIR)$(PREFIX)/lib/paliforge/lua -o $(TARGET)
 
 clean:
 	rm -rf $(DESTDIR)$(PREFIX)/lib/paliforge
