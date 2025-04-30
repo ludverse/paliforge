@@ -1,11 +1,14 @@
 if PALIFORGE_LUA_LIB_STR then
-	-- add lib to path so require can find the other files
+	-- add lib to path so require() can find the other lua files
 	package.path = package.path .. ";" .. PALIFORGE_LUA_LIB_STR .. "/?.lua"
 end
+
+local json = require("json")
 
 HOME_DIR = os.getenv("HOME")
 
 local default_build = {
+	home_files = {},
 	yay_pkgs = {},
 	fish_config = {
 		aliases = {},
@@ -23,8 +26,6 @@ local default_build = {
 		VIDEOS = "$HOME/Videos",
 	},
 }
-
-local json = require("json")
 
 local home = os.getenv("HOME")
 local config_path = home .. "/.config/paliforge"
@@ -55,11 +56,13 @@ end
 
 dofile(config_path .. "/config.lua")
 
+require("build.home_files")(BUILD, forgebuild)
 require("build.fish_config")(BUILD, forgebuild)
 require("build.alacritty_config")(BUILD, forgebuild)
 require("build.yay_pkgs")(BUILD, forgebuild)
 require("build.user_dirs")(BUILD, forgebuild)
 
 local forgebuild_file = io.open(config_path .. "/forgebuild", "w")
+print(config_path .. "/forgebuild")
 print("[forge] writing forgebuild")
 forgebuild_file:write(json.encode(BUILD))
